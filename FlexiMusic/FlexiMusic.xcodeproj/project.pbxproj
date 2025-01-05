@@ -15,6 +15,7 @@
 		A04820762D2ABA9800EB154C /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04820752D2ABA9800EB154C /* LibraryViewController.swift */; };
 		A04820782D2ABAD200EB154C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04820772D2ABAD200EB154C /* TabBarController.swift */; };
 		A048207B2D2AC1D800EB154C /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A048207A2D2AC1D800EB154C /* APIService.swift */; };
+		A04820832D2AC4E800EB154C /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04820822D2AC4E800EB154C /* SearchResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		A04820752D2ABA9800EB154C /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		A04820772D2ABAD200EB154C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A048207A2D2AC1D800EB154C /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		A04820822D2AC4E800EB154C /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		A04820672D2AB6A000EB154C /* FlexiMusic */ = {
 			isa = PBXGroup;
 			children = (
+				A04820812D2AC4C100EB154C /* Models */,
 				A04820792D2AC18400EB154C /* Services */,
 				A048206F2D2AB72A00EB154C /* App */,
 				A04820702D2AB75E00EB154C /* Controllers */,
@@ -111,6 +114,14 @@
 				A048207A2D2AC1D800EB154C /* APIService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		A04820812D2AC4C100EB154C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A04820822D2AC4E800EB154C /* SearchResponse.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A04820832D2AC4E800EB154C /* SearchResponse.swift in Sources */,
 				A04820682D2AB6A000EB154C /* AppDelegate.swift in Sources */,
 				A04820762D2ABA9800EB154C /* LibraryViewController.swift in Sources */,
 				A04820692D2AB6A000EB154C /* SceneDelegate.swift in Sources */,
