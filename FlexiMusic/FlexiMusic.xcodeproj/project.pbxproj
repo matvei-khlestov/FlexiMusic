@@ -14,6 +14,7 @@
 		A04820742D2ABA0800EB154C /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04820732D2ABA0800EB154C /* SearchTableViewController.swift */; };
 		A04820762D2ABA9800EB154C /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04820752D2ABA9800EB154C /* LibraryViewController.swift */; };
 		A04820782D2ABAD200EB154C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04820772D2ABAD200EB154C /* TabBarController.swift */; };
+		A048207B2D2AC1D800EB154C /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A048207A2D2AC1D800EB154C /* APIService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		A04820732D2ABA0800EB154C /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		A04820752D2ABA9800EB154C /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		A04820772D2ABAD200EB154C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		A048207A2D2AC1D800EB154C /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		A04820672D2AB6A000EB154C /* FlexiMusic */ = {
 			isa = PBXGroup;
 			children = (
+				A04820792D2AC18400EB154C /* Services */,
 				A048206F2D2AB72A00EB154C /* App */,
 				A04820702D2AB75E00EB154C /* Controllers */,
 				A04820712D2AB77000EB154C /* LaunchScreen */,
@@ -100,6 +103,14 @@
 				A048205F2D2AB6A000EB154C /* Assets.xcassets */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		A04820792D2AC18400EB154C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A048207A2D2AC1D800EB154C /* APIService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,6 +190,7 @@
 				A04820762D2ABA9800EB154C /* LibraryViewController.swift in Sources */,
 				A04820692D2AB6A000EB154C /* SceneDelegate.swift in Sources */,
 				A04820782D2ABAD200EB154C /* TabBarController.swift in Sources */,
+				A048207B2D2AC1D800EB154C /* APIService.swift in Sources */,
 				A04820742D2ABA0800EB154C /* SearchTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
