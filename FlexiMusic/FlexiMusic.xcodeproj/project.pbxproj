@@ -16,6 +16,8 @@
 		A04820782D2ABAD200EB154C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04820772D2ABAD200EB154C /* TabBarController.swift */; };
 		A048207B2D2AC1D800EB154C /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A048207A2D2AC1D800EB154C /* APIService.swift */; };
 		A04820832D2AC4E800EB154C /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04820822D2AC4E800EB154C /* SearchResponse.swift */; };
+		A04820852D2AC61900EB154C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04820842D2AC61900EB154C /* NetworkService.swift */; };
+		A04820872D2AC6A700EB154C /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04820862D2AC6A700EB154C /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		A04820772D2ABAD200EB154C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		A048207A2D2AC1D800EB154C /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		A04820822D2AC4E800EB154C /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
+		A04820842D2AC61900EB154C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		A04820862D2AC6A700EB154C /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				A048207A2D2AC1D800EB154C /* APIService.swift */,
+				A04820842D2AC61900EB154C /* NetworkService.swift */,
+				A04820862D2AC6A700EB154C /* NetworkError.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -199,9 +205,11 @@
 			files = (
 				A04820832D2AC4E800EB154C /* SearchResponse.swift in Sources */,
 				A04820682D2AB6A000EB154C /* AppDelegate.swift in Sources */,
+				A04820852D2AC61900EB154C /* NetworkService.swift in Sources */,
 				A04820762D2ABA9800EB154C /* LibraryViewController.swift in Sources */,
 				A04820692D2AB6A000EB154C /* SceneDelegate.swift in Sources */,
 				A04820782D2ABAD200EB154C /* TabBarController.swift in Sources */,
+				A04820872D2AC6A700EB154C /* NetworkError.swift in Sources */,
 				A048207B2D2AC1D800EB154C /* APIService.swift in Sources */,
 				A04820742D2ABA0800EB154C /* SearchTableViewController.swift in Sources */,
 			);
