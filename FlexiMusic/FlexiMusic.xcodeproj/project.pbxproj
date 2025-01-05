@@ -18,6 +18,7 @@
 		A04820832D2AC4E800EB154C /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04820822D2AC4E800EB154C /* SearchResponse.swift */; };
 		A04820852D2AC61900EB154C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04820842D2AC61900EB154C /* NetworkService.swift */; };
 		A04820872D2AC6A700EB154C /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04820862D2AC6A700EB154C /* NetworkError.swift */; };
+		A048208A2D2ACB2700EB154C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = A04820892D2ACB2700EB154C /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A048208A2D2ACB2700EB154C /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +149,7 @@
 			);
 			name = FlexiMusic;
 			packageProductDependencies = (
+				A04820892D2ACB2700EB154C /* Kingfisher */,
 			);
 			productName = FlexiMusic;
 			productReference = A04820462D2AB66400EB154C /* FlexiMusic.app */;
@@ -176,6 +179,9 @@
 			);
 			mainGroup = A048203D2D2AB66400EB154C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A04820882D2ACB2700EB154C /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A04820472D2AB66400EB154C /* Products */;
 			projectDirPath = "";
@@ -239,6 +245,7 @@
 				DEVELOPMENT_TEAM = QZ329TNU43;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FlexiMusic/App/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -271,6 +278,7 @@
 				DEVELOPMENT_TEAM = QZ329TNU43;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FlexiMusic/App/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -434,6 +442,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A04820882D2ACB2700EB154C /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A04820892D2ACB2700EB154C /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A04820882D2ACB2700EB154C /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A048203E2D2AB66400EB154C /* Project object */;
 }
