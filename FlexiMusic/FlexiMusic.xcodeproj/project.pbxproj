@@ -12,7 +12,6 @@
 		A048206A2D2AB6A000EB154C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04820662D2AB6A000EB154C /* ViewController.swift */; };
 		A048206B2D2AB6A000EB154C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A048205F2D2AB6A000EB154C /* Assets.xcassets */; };
 		A048206D2D2AB6A000EB154C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A04820622D2AB6A000EB154C /* LaunchScreen.storyboard */; };
-		A048206E2D2AB6A000EB154C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A04820642D2AB6A000EB154C /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,7 +20,6 @@
 		A048205F2D2AB6A000EB154C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A04820602D2AB6A000EB154C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A04820612D2AB6A000EB154C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A04820632D2AB6A000EB154C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A04820652D2AB6A000EB154C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A04820662D2AB6A000EB154C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -56,15 +54,46 @@
 		A04820672D2AB6A000EB154C /* FlexiMusic */ = {
 			isa = PBXGroup;
 			children = (
-				A048205E2D2AB6A000EB154C /* AppDelegate.swift */,
-				A048205F2D2AB6A000EB154C /* Assets.xcassets */,
-				A04820602D2AB6A000EB154C /* Info.plist */,
-				A04820622D2AB6A000EB154C /* LaunchScreen.storyboard */,
-				A04820642D2AB6A000EB154C /* Main.storyboard */,
-				A04820652D2AB6A000EB154C /* SceneDelegate.swift */,
-				A04820662D2AB6A000EB154C /* ViewController.swift */,
+				A048206F2D2AB72A00EB154C /* App */,
+				A04820702D2AB75E00EB154C /* Controllers */,
+				A04820712D2AB77000EB154C /* LaunchScreen */,
+				A04820722D2AB77700EB154C /* Resource */,
 			);
 			path = FlexiMusic;
+			sourceTree = "<group>";
+		};
+		A048206F2D2AB72A00EB154C /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A048205E2D2AB6A000EB154C /* AppDelegate.swift */,
+				A04820652D2AB6A000EB154C /* SceneDelegate.swift */,
+				A04820602D2AB6A000EB154C /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A04820702D2AB75E00EB154C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A04820662D2AB6A000EB154C /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		A04820712D2AB77000EB154C /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A04820622D2AB6A000EB154C /* LaunchScreen.storyboard */,
+			);
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		A04820722D2AB77700EB154C /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				A048205F2D2AB6A000EB154C /* Assets.xcassets */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,7 +159,6 @@
 			files = (
 				A048206B2D2AB6A000EB154C /* Assets.xcassets in Resources */,
 				A048206D2D2AB6A000EB154C /* LaunchScreen.storyboard in Resources */,
-				A048206E2D2AB6A000EB154C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,14 +186,6 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		A04820642D2AB6A000EB154C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A04820632D2AB6A000EB154C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -178,12 +198,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QZ329TNU43;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FlexiMusic/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = FlexiMusic;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
+				INFOPLIST_FILE = FlexiMusic/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
@@ -213,12 +230,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QZ329TNU43;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FlexiMusic/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = FlexiMusic;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
+				INFOPLIST_FILE = FlexiMusic/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
