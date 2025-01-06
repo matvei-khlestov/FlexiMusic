@@ -13,8 +13,8 @@ struct SearchResponse: Decodable {
 }
 
 struct Track: Decodable {
-    let trackName: String?
-    let artistName: String?
-    let collectionName: String?
+    let trackName: String
+    let artistName: String
+    let collectionName: String
     let artworkUrl100: URL?
 }

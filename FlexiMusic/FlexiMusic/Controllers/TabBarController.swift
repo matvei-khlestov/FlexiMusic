@@ -25,7 +25,7 @@ extension TabBarController {
         
         viewControllers = [
             generateViewController(
-                rootViewController: SearchTableViewController(),
+                rootViewController: SearchViewController(),
                 image: searchImage,
                 title: "Search"
             ),

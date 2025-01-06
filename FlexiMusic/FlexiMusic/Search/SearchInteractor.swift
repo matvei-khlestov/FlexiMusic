@@ -16,10 +16,28 @@ final class SearchInteractor: SearchBusinessLogic {
     
     var presenter: SearchPresentationLogic?
     var service: SearchService?
+    var networkService = NetworkService.shared
     
     func makeRequest(request: Search.Model.Request.RequestType) {
         if service == nil {
             service = SearchService()
+        }
+        
+        switch request {
+        case .some:
+            print("interactor .some")
+        case .getTracks(let searchTerm):
+            print("interactor .getTracks")
+            
+            networkService.fetchTracks(searchTerm: searchTerm) { [weak self] result in
+                switch result {
+                case .success(let tracks):
+                    guard let self = self else { return }
+                    self.presenter?.presentData(response: Search.Model.Response.ResponseType.presentTracks(tracks: tracks))
+                case .failure(let error):
+                    print("Error in fetch tracks: \(error)")
+                }
+            }
         }
     }
 }
