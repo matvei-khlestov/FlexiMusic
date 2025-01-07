@@ -32,11 +32,12 @@ enum Search {
 }
 
 struct SearchViewModel {
-    struct Cell {
+    struct Cell: TrackCellViewModelProtocol {
         var iconUrl: URL?
         var trackName: String
         var collectionName: String
         var artistName: String
+        var previewUrl: URL?
     }
     
     let cells: [Cell]

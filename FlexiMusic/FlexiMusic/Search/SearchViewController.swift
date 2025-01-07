@@ -9,12 +9,15 @@
 import UIKit
 import Kingfisher
 
-protocol SearchDisplayLogic: AnyObject {
+// MARK: - SearchDisplayLogicProtocol
+protocol SearchDisplayLogicProtocol: AnyObject {
     func displayData(viewModel: Search.Model.ViewModel.ViewModelData)
 }
 
-final class SearchViewController: UITableViewController, SearchDisplayLogic {
+// MARK: - SearchViewController
+final class SearchViewController: UITableViewController, SearchDisplayLogicProtocol {
     
+    // MARK: - Properties
     var interactor: SearchBusinessLogic?
     var router: (NSObjectProtocol & SearchRoutingLogic)?
     
@@ -22,9 +25,9 @@ final class SearchViewController: UITableViewController, SearchDisplayLogic {
     private var searchTimer: Timer?
     private var searchViewModel = SearchViewModel(cells: [])
     
-    // MARK: Routing
+    // MARK: - Routing
     
-    // MARK: View lifecycle
+    // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,7 +38,7 @@ final class SearchViewController: UITableViewController, SearchDisplayLogic {
         setupSearchBar()
     }
     
-    // MARK: SearchDisplayLogic
+    // MARK: - SearchDisplayLogic
     func displayData(viewModel: Search.Model.ViewModel.ViewModelData) {
         switch viewModel {
         case .some:
@@ -46,7 +49,7 @@ final class SearchViewController: UITableViewController, SearchDisplayLogic {
         }
     }
     
-    // MARK: Setup
+    // MARK: - Setup
     private func setup() {
         let viewController = self
         let interactor = SearchInteractor()
@@ -65,8 +68,8 @@ final class SearchViewController: UITableViewController, SearchDisplayLogic {
 extension SearchViewController {
     private func registerTableViewCell() {
         tableView.register(
-            UITableViewCell.self,
-            forCellReuseIdentifier: "cell"
+            TrackTableViewCell.self,
+            forCellReuseIdentifier: TrackTableViewCell.reuseId
         )
     }
     
@@ -84,21 +87,16 @@ extension SearchViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: TrackTableViewCell.reuseId, for: indexPath)
+        guard let cell = cell as? TrackTableViewCell else { return UITableViewCell() }
         
         let cellViewModel = searchViewModel.cells[indexPath.row]
-        
-        var content = cell.defaultContentConfiguration()
-        content.text = cellViewModel.trackName
-        content.secondaryText = cellViewModel.artistName
-        
-        if let url = cellViewModel.iconUrl {
-            let imageView = UIImageView()
-            imageView.kf.setImage(with: url)
-            content.image = imageView.image
-        }
-        cell.contentConfiguration = content
+        cell.configure(viewModel: cellViewModel)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        84
     }
 }
 

@@ -26,7 +26,6 @@
 		A07484532D2C49030065D8BF /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07484492D2C49030065D8BF /* SearchRouter.swift */; };
 		A07484562D2D5A990065D8BF /* TrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07484552D2D5A990065D8BF /* TrackTableViewCell.swift */; };
 		A07484592D2D5F1B0065D8BF /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A07484582D2D5F1B0065D8BF /* SnapKit */; };
-		A074845B2D2D5F1B0065D8BF /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = A074845A2D2D5F1B0065D8BF /* SnapKit-Dynamic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,7 +57,6 @@
 			files = (
 				A048208A2D2ACB2700EB154C /* Kingfisher in Frameworks */,
 				A07484592D2D5F1B0065D8BF /* SnapKit in Frameworks */,
-				A074845B2D2D5F1B0065D8BF /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,7 +187,6 @@
 			packageProductDependencies = (
 				A04820892D2ACB2700EB154C /* Kingfisher */,
 				A07484582D2D5F1B0065D8BF /* SnapKit */,
-				A074845A2D2D5F1B0065D8BF /* SnapKit-Dynamic */,
 			);
 			productName = FlexiMusic;
 			productReference = A04820462D2AB66400EB154C /* FlexiMusic.app */;
@@ -519,11 +516,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A07484572D2D5F1B0065D8BF /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		A074845A2D2D5F1B0065D8BF /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A07484572D2D5F1B0065D8BF /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

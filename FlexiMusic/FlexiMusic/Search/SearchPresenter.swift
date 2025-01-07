@@ -14,7 +14,7 @@ protocol SearchPresentationLogic: AnyObject {
 
 final class SearchPresenter: SearchPresentationLogic {
     
-    weak var viewController: SearchDisplayLogic?
+    weak var viewController: SearchDisplayLogicProtocol?
     
     func presentData(response: Search.Model.Response.ResponseType) {
         switch response {
@@ -35,8 +35,9 @@ final class SearchPresenter: SearchPresentationLogic {
         return SearchViewModel.Cell(
             iconUrl: track.artworkUrl100,
             trackName: track.trackName,
-            collectionName: track.collectionName,
-            artistName: track.artistName
+            collectionName: track.collectionName ?? "",
+            artistName: track.artistName,
+            previewUrl: track.previewUrl
         )
     }
 }
