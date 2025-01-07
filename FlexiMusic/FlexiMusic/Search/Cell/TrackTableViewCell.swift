@@ -43,7 +43,7 @@ final class TrackTableViewCell: UITableViewCell {
         createLabel(size: 13, textColor: .secondaryLabel)
     }()
     
-    // MARK: - Initializers
+    // MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupCell()
@@ -52,6 +52,11 @@ final class TrackTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupCell()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        trackImageView.image = nil
     }
     
     // MARK: - Configuration Cell
