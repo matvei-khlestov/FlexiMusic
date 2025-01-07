@@ -22,8 +22,11 @@ final class SearchViewController: UITableViewController, SearchDisplayLogicProto
     var router: (NSObjectProtocol & SearchRoutingLogic)?
     
     private let searchController = UISearchController(searchResultsController: nil)
+    
     private var searchTimer: Timer?
     private var searchViewModel = SearchViewModel(cells: [])
+    
+    private lazy var footerView = FooterView()
     
     // MARK: - Routing
     
@@ -41,11 +44,12 @@ final class SearchViewController: UITableViewController, SearchDisplayLogicProto
     // MARK: - SearchDisplayLogic
     func displayData(viewModel: Search.Model.ViewModel.ViewModelData) {
         switch viewModel {
-        case .some:
-            print("viewController .some")
         case .displayTracks(let searchViewModel):
             self.searchViewModel = searchViewModel
             tableView.reloadData()
+            footerView.hideLoader()
+        case .displayFooterView:
+            footerView.showLoader()
         }
     }
     
@@ -72,7 +76,7 @@ extension SearchViewController {
             forCellReuseIdentifier: TrackTableViewCell.reuseId
         )
         
-        tableView.tableFooterView = UIView()
+        tableView.tableFooterView = footerView
     }
     
     private func setupSearchBar() {
