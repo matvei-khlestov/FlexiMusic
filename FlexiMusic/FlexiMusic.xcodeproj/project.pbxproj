@@ -24,6 +24,9 @@
 		A07484512D2C49030065D8BF /* SearchModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07484472D2C49030065D8BF /* SearchModels.swift */; };
 		A07484522D2C49030065D8BF /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07484482D2C49030065D8BF /* SearchPresenter.swift */; };
 		A07484532D2C49030065D8BF /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07484492D2C49030065D8BF /* SearchRouter.swift */; };
+		A07484562D2D5A990065D8BF /* TrackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07484552D2D5A990065D8BF /* TrackTableViewCell.swift */; };
+		A07484592D2D5F1B0065D8BF /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A07484582D2D5F1B0065D8BF /* SnapKit */; };
+		A074845B2D2D5F1B0065D8BF /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = A074845A2D2D5F1B0065D8BF /* SnapKit-Dynamic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +48,7 @@
 		A07484492D2C49030065D8BF /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 		A074844A2D2C49030065D8BF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		A074844C2D2C49030065D8BF /* SearchWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWorker.swift; sourceTree = "<group>"; };
+		A07484552D2D5A990065D8BF /* TrackTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A048208A2D2ACB2700EB154C /* Kingfisher in Frameworks */,
+				A07484592D2D5F1B0065D8BF /* SnapKit in Frameworks */,
+				A074845B2D2D5F1B0065D8BF /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +151,7 @@
 		A048208B2D2C472D00EB154C /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				A07484542D2D5A7D0065D8BF /* Cell */,
 				A074844A2D2C49030065D8BF /* SearchViewController.swift */,
 				A07484462D2C49030065D8BF /* SearchInteractor.swift */,
 				A07484482D2C49030065D8BF /* SearchPresenter.swift */,
@@ -153,6 +160,14 @@
 				A07484492D2C49030065D8BF /* SearchRouter.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		A07484542D2D5A7D0065D8BF /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A07484552D2D5A990065D8BF /* TrackTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,6 +188,8 @@
 			name = FlexiMusic;
 			packageProductDependencies = (
 				A04820892D2ACB2700EB154C /* Kingfisher */,
+				A07484582D2D5F1B0065D8BF /* SnapKit */,
+				A074845A2D2D5F1B0065D8BF /* SnapKit-Dynamic */,
 			);
 			productName = FlexiMusic;
 			productReference = A04820462D2AB66400EB154C /* FlexiMusic.app */;
@@ -204,6 +221,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				A04820882D2ACB2700EB154C /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				A07484572D2D5F1B0065D8BF /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A04820472D2AB66400EB154C /* Products */;
@@ -232,6 +250,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A07484562D2D5A990065D8BF /* TrackTableViewCell.swift in Sources */,
 				A074844E2D2C49030065D8BF /* SearchInteractor.swift in Sources */,
 				A074844F2D2C49030065D8BF /* SearchWorker.swift in Sources */,
 				A07484502D2C49030065D8BF /* SearchViewController.swift in Sources */,
@@ -480,6 +499,14 @@
 				minimumVersion = 8.1.3;
 			};
 		};
+		A07484572D2D5F1B0065D8BF /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -487,6 +514,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A04820882D2ACB2700EB154C /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		A07484582D2D5F1B0065D8BF /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A07484572D2D5F1B0065D8BF /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		A074845A2D2D5F1B0065D8BF /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A07484572D2D5F1B0065D8BF /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
