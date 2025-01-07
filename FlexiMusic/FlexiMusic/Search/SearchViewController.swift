@@ -33,7 +33,7 @@ final class SearchViewController: UITableViewController, SearchDisplayLogicProto
         
         setup()
         
-        registerTableViewCell()
+        configureTableViewCell()
         
         setupSearchBar()
     }
@@ -66,11 +66,13 @@ final class SearchViewController: UITableViewController, SearchDisplayLogicProto
 
 // MARK: - Private Methods
 extension SearchViewController {
-    private func registerTableViewCell() {
+    private func configureTableViewCell() {
         tableView.register(
             TrackTableViewCell.self,
             forCellReuseIdentifier: TrackTableViewCell.reuseId
         )
+        
+        tableView.tableFooterView = UIView()
     }
     
     private func setupSearchBar() {
@@ -97,6 +99,19 @@ extension SearchViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         84
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "Please enter a search term above..."
+        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        label.textColor = .label
+        label.textAlignment = .center
+        return label
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        searchViewModel.cells.count > 0 ? 0 : 250
     }
 }
 
