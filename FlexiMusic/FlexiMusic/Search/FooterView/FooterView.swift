@@ -11,6 +11,7 @@ import SnapKit
 final class FooterView: UIView {
     
     // MARK: - UI Elements
+    
     private lazy var footerlabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14)
@@ -26,7 +27,8 @@ final class FooterView: UIView {
         return loader
     }()
     
-    // MARK: - Lifecycle
+    // MARK: - Life Cycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -38,6 +40,7 @@ final class FooterView: UIView {
     }
     
     // MARK: - Public Methods
+    
     func showLoader() {
         loader.startAnimating()
         footerlabel.text = "LOADING"
@@ -49,20 +52,15 @@ final class FooterView: UIView {
     }
     
     // MARK: - Private Methods
+    
     private func setupView() {
         addSubviews(loader, footerlabel)
-        
         setupConstraints()
-    }
-    
-    private func addSubviews(_ subviews: UIView...) {
-        for subview in subviews {
-            addSubview(subview)
-        }
     }
 }
 
 // MARK: - Constraints
+
 extension FooterView {
     private func setupConstraints() {
         loader.snp.makeConstraints { make in

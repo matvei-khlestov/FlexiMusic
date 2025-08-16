@@ -77,12 +77,6 @@ final class TrackTableViewCell: UITableViewCell {
         )
         setupConstraints()
     }
-    
-    private func addSubviews(_ subviews: UIView...) {
-        for subview in subviews {
-            addSubview(subview)
-        }
-    }
 }
 
 // MARK: - UI Helper

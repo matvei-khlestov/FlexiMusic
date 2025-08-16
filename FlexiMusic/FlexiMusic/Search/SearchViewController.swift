@@ -10,14 +10,17 @@ import UIKit
 import Kingfisher
 
 // MARK: - SearchDisplayLogicProtocol
+
 protocol SearchDisplayLogicProtocol: AnyObject {
     func displayData(viewModel: Search.Model.ViewModel.ViewModelData)
 }
 
 // MARK: - SearchViewController
+
 final class SearchViewController: UITableViewController, SearchDisplayLogicProtocol {
     
     // MARK: - Properties
+    
     var interactor: SearchBusinessLogic?
     var router: (NSObjectProtocol & SearchRoutingLogic)?
     
@@ -30,7 +33,8 @@ final class SearchViewController: UITableViewController, SearchDisplayLogicProto
     
     // MARK: - Routing
     
-    // MARK: - View lifecycle
+    // MARK: - View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,7 +45,15 @@ final class SearchViewController: UITableViewController, SearchDisplayLogicProto
         setupSearchBar()
     }
     
+    // MARK: - Touch Handling
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+    
     // MARK: - SearchDisplayLogic
+    
     func displayData(viewModel: Search.Model.ViewModel.ViewModelData) {
         switch viewModel {
         case .displayTracks(let searchViewModel):
@@ -54,6 +66,7 @@ final class SearchViewController: UITableViewController, SearchDisplayLogicProto
     }
     
     // MARK: - Setup
+    
     private func setup() {
         let viewController = self
         let interactor = SearchInteractor()
@@ -69,6 +82,7 @@ final class SearchViewController: UITableViewController, SearchDisplayLogicProto
 }
 
 // MARK: - Private Methods
+
 extension SearchViewController {
     private func configureTableViewCell() {
         tableView.register(
@@ -87,6 +101,7 @@ extension SearchViewController {
 }
 
 // MARK: - UITableViewDataSource
+
 extension SearchViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         searchViewModel.cells.count
@@ -105,6 +120,18 @@ extension SearchViewController {
         84
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let windowScene = UIApplication.shared.connectedScenes
+            .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
+              let window = windowScene.windows.first(where: { $0.isKeyWindow }) else {
+            return
+        }
+        
+        let trackDetailView = TrackDetailView()
+        trackDetailView.frame = window.bounds
+        window.addSubview(trackDetailView)
+    }
+    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
         label.text = "Please enter a search term above..."
@@ -120,16 +147,9 @@ extension SearchViewController {
 }
 
 // MARK: - UISearchBarDelegate
+
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        //        let trimmedText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        //
-        //        guard !trimmedText.isEmpty else {
-        //            //            self.tracks = []
-        //            self.tableView.reloadData()
-        //            return
-        //        }
-        
         searchTimer?.invalidate()
         searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] _ in
             guard let self = self else { return }
