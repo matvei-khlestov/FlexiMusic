@@ -19,6 +19,7 @@ final class NetworkService {
             completion(.failure(.invalidRequest))
             return
         }
+        
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let response = response as? HTTPURLResponse {
                 print("Response status code: \(response.statusCode)")

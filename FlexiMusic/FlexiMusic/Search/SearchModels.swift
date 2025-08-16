@@ -15,12 +15,14 @@ enum Search {
                 case getTracks(searchTerm: String)
             }
         }
+        
         struct Response {
             enum ResponseType {
                 case presentTracks(tracks: [Track]?)
                 case presentFooterView
             }
         }
+        
         struct ViewModel {
             enum ViewModelData {
                 case displayTracks(SearchViewModel: SearchViewModel)
