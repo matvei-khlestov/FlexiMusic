@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
+import AVFoundation
 
 final class TrackDetailView: UIView {
     
@@ -85,7 +87,7 @@ final class TrackDetailView: UIView {
         return stackView
     }()
     
-    private lazy var trackTitleTextLabel: UILabel = {
+    private lazy var trackTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Track title"
         label.textAlignment = .center
@@ -94,7 +96,7 @@ final class TrackDetailView: UIView {
         return label
     }()
     
-    private lazy var authorTitleTextLabel: UILabel = {
+    private lazy var authorTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Author"
         label.textAlignment = .center
@@ -128,6 +130,7 @@ final class TrackDetailView: UIView {
         button.tintColor = .label
         button.layer.cornerRadius = 28
         button.clipsToBounds = true
+        button.addTarget(self, action: #selector(playPauseAction), for: .touchUpInside)
         return button
     }()
     
@@ -170,6 +173,12 @@ final class TrackDetailView: UIView {
         return imageView
     }()
     
+    private let player: AVPlayer = {
+        let avPlayer = AVPlayer()
+        avPlayer.automaticallyWaitsToMinimizeStalling = false
+        return avPlayer
+    }()
+    
     // MARK: - Init
     
     override init(frame: CGRect) {
@@ -184,6 +193,19 @@ final class TrackDetailView: UIView {
         backgroundColor = .systemBackground
         setupUserInterface()
         setupConstraints()
+    }
+    
+    func configure(viewModel: SearchViewModel.Cell) {
+        trackTitleLabel.text = viewModel.trackName
+        authorTitleLabel.text = viewModel.artistName
+        playTrack(previewUrl: viewModel.previewUrl)
+        
+        if let urlString = viewModel.iconUrl?.absoluteString {
+            let string600 = urlString.replacingOccurrences(of: "100x100", with: "600x600")
+            if let url = URL(string: string600) {
+                trackArtworkImageView.kf.setImage(with: url)
+            }
+        }
     }
     
     // MARK: - Setup
@@ -211,8 +233,8 @@ final class TrackDetailView: UIView {
         )
         
         titlesContainerStackView.addArrangedSubviews(
-            trackTitleTextLabel,
-            authorTitleTextLabel
+            trackTitleLabel,
+            authorTitleLabel
         )
         
         playbackControlsStackView.addArrangedSubviews(
@@ -227,6 +249,8 @@ final class TrackDetailView: UIView {
             volumeMaxIconImageView
         )
     }
+    
+    
     
     // MARK: - Constraints
     
@@ -264,25 +288,32 @@ final class TrackDetailView: UIView {
                 make.width.equalTo(volumeMaxIconImageView.snp.height)
             }
         }
+    }
+    
+    // MARK: - Player
+    private func playTrack(previewUrl: URL?) {
+        print("Пытаюсь включить трек по ссылке: \(previewUrl?.absoluteString ?? "Отсутствует")")
         
-        // MARK: - Public API
-        
-        func configureContent(trackTitle: String, authorTitle: String, artworkImage: UIImage?) {
-            trackTitleTextLabel.text = trackTitle
-            authorTitleTextLabel.text = authorTitle
-            trackArtworkImageView.image = artworkImage
-        }
-        
-        func updateTimeLabels(currentTimeText: String, durationText: String) {
-            currentTimeValueLabel.text = currentTimeText
-            durationValueLabel.text = durationText
-        }
+        guard let url = previewUrl else { return }
+        let playerItem = AVPlayerItem(url: url)
+        player.replaceCurrentItem(with: playerItem)
+        player.play()
     }
     
     // MARK: - Action
     
     @objc private func handleSlideDownHandleButtonTap() {
         self.removeFromSuperview()
+    }
+    
+    @objc private func playPauseAction() {
+        if player.timeControlStatus == .paused {
+            player.play()
+            playPauseToggleButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        } else {
+            player.pause()
+            playPauseToggleButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        }
     }
 }
 

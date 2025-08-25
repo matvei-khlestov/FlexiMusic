@@ -110,7 +110,6 @@ extension SearchViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TrackTableViewCell.reuseId, for: indexPath)
         guard let cell = cell as? TrackTableViewCell else { return UITableViewCell() }
-        
         let cellViewModel = searchViewModel.cells[indexPath.row]
         cell.configure(viewModel: cellViewModel)
         return cell
@@ -126,9 +125,10 @@ extension SearchViewController {
               let window = windowScene.windows.first(where: { $0.isKeyWindow }) else {
             return
         }
-        
+        let cellViewModel = searchViewModel.cells[indexPath.row]
         let trackDetailView = TrackDetailView()
         trackDetailView.frame = window.bounds
+        trackDetailView.configure(viewModel: cellViewModel)
         window.addSubview(trackDetailView)
     }
     
