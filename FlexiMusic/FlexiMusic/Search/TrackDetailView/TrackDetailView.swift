@@ -34,9 +34,12 @@ final class TrackDetailView: UIView {
     
     private lazy var trackArtworkImageView: UIImageView = {
         let imageView = UIImageView()
+        let scale: CGFloat = 0.8
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.backgroundColor = .secondarySystemBackground
+        imageView.layer.cornerRadius = 5
+        imageView.transform = CGAffineTransform(scaleX: scale, y: scale)
         return imageView
     }()
     
@@ -200,6 +203,8 @@ final class TrackDetailView: UIView {
         authorTitleLabel.text = viewModel.artistName
         playTrack(previewUrl: viewModel.previewUrl)
         
+        monitorStartTime()
+        
         if let urlString = viewModel.iconUrl?.absoluteString {
             let string600 = urlString.replacingOccurrences(of: "100x100", with: "600x600")
             if let url = URL(string: string600) {
@@ -250,8 +255,6 @@ final class TrackDetailView: UIView {
         )
     }
     
-    
-    
     // MARK: - Constraints
     
     private func setupConstraints() {
@@ -290,6 +293,21 @@ final class TrackDetailView: UIView {
         }
     }
     
+    // MARK: - Time setup
+    
+    private func monitorStartTime() {
+        
+        let time = CMTimeMake(value: 1, timescale: 3)
+        let times = [NSValue(time: time)]
+        player.addBoundaryTimeObserver(forTimes: times, queue: .main) { [weak self] in
+            self?.enlargeTrackImageView()
+        }
+    }
+    
+    deinit {
+        print("TrackDetailView memory being reclaimed...")
+    }
+    
     // MARK: - Player
     private func playTrack(previewUrl: URL?) {
         print("Пытаюсь включить трек по ссылке: \(previewUrl?.absoluteString ?? "Отсутствует")")
@@ -298,6 +316,35 @@ final class TrackDetailView: UIView {
         let playerItem = AVPlayerItem(url: url)
         player.replaceCurrentItem(with: playerItem)
         player.play()
+    }
+    
+    // MARK: - Animations
+    
+    private func enlargeTrackImageView() {
+        UIView.animate(
+            withDuration: 1,
+            delay: 0,
+            usingSpringWithDamping: 0.5,
+            initialSpringVelocity: 1,
+            options: .curveEaseInOut,
+            animations: {
+            self.trackArtworkImageView.transform = .identity
+        }, completion: nil
+        )
+    }
+    
+    private func reduceTrackImageView() {
+        UIView.animate(
+            withDuration: 1,
+            delay: 0,
+            usingSpringWithDamping: 0.5,
+            initialSpringVelocity: 1,
+            options: .curveEaseInOut,
+            animations: {
+            let scale: CGFloat = 0.8
+            self.trackArtworkImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
+        }, completion: nil
+        )
     }
     
     // MARK: - Action
@@ -310,9 +357,11 @@ final class TrackDetailView: UIView {
         if player.timeControlStatus == .paused {
             player.play()
             playPauseToggleButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            enlargeTrackImageView()
         } else {
             player.pause()
             playPauseToggleButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            reduceTrackImageView()
         }
     }
 }
