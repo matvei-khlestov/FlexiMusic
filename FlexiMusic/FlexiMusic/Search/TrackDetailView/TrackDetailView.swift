@@ -55,6 +55,16 @@ final class TrackDetailView: UIView {
         slider.minimumValue = 0
         slider.maximumValue = 1
         slider.value = 0
+        slider.addTarget(self, action: #selector(handlePlaybackProgressSlider), for: .valueChanged)
+        return slider
+    }()
+    
+    private lazy var volumeLevelSlider: UISlider = {
+        let slider = UISlider()
+        slider.minimumValue = 0
+        slider.maximumValue = 1
+        slider.value = 0.5
+        slider.addTarget(self, action: #selector(handleVolumeLevelSlider), for: .valueChanged)
         return slider
     }()
     
@@ -159,14 +169,6 @@ final class TrackDetailView: UIView {
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .secondaryLabel
         return imageView
-    }()
-    
-    private lazy var volumeLevelSlider: UISlider = {
-        let slider = UISlider()
-        slider.minimumValue = 0
-        slider.maximumValue = 1
-        slider.value = 0.5
-        return slider
     }()
     
     private lazy var volumeMaxIconImageView: UIImageView = {
@@ -308,12 +310,21 @@ final class TrackDetailView: UIView {
     private func observeOlayerCurrentTime() {
         let interval = CMTimeMake(value: 1, timescale: 2)
         player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] (time) in
-            self?.currentTimeValueLabel.text = time.toDisplayString()
+            guard let self else { return }
+            self.currentTimeValueLabel.text = time.toDisplayString()
             
-            let durationTime = self?.player.currentItem?.duration
+            let durationTime = self.player.currentItem?.duration
             let currentDurationText = ((durationTime ?? CMTimeMake(value: 1, timescale: 1)) - time).toDisplayString()
-            self?.durationValueLabel.text = "-\(currentDurationText)"
+            self.durationValueLabel.text = "-\(currentDurationText)"
+            self.updatePlaybackProgressSlider()
         }
+    }
+    
+    private func updatePlaybackProgressSlider() {
+        let currentTimeSeconds = CMTimeGetSeconds(player.currentTime())
+        let durationSeconds = CMTimeGetSeconds(player.currentItem?.duration ?? CMTimeMake(value: 1, timescale: 1))
+        let percentage = currentTimeSeconds / durationSeconds
+        self.playbackProgressSlider.value = Float(percentage)
     }
     
     deinit {
@@ -321,6 +332,7 @@ final class TrackDetailView: UIView {
     }
     
     // MARK: - Player
+    
     private func playTrack(previewUrl: URL?) {
         print("Пытаюсь включить трек по ссылке: \(previewUrl?.absoluteString ?? "Отсутствует")")
         
@@ -360,6 +372,19 @@ final class TrackDetailView: UIView {
     }
     
     // MARK: - Action
+    
+    @objc private func handlePlaybackProgressSlider() {
+        let percentage = playbackProgressSlider.value
+        guard let duration = player.currentItem?.duration else { return }
+        let durationInSeconds = CMTimeGetSeconds(duration)
+        let seekTimeUnSeconds = Float64(percentage) * durationInSeconds
+        let seekTime = CMTimeMakeWithSeconds(seekTimeUnSeconds, preferredTimescale: 1)
+        player.seek(to: seekTime)
+    }
+    
+    @objc private func handleVolumeLevelSlider() {
+        player.volume = volumeLevelSlider.value
+    }
     
     @objc private func handleSlideDownHandleButtonTap() {
         self.removeFromSuperview()
