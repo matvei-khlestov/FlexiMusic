@@ -198,12 +198,15 @@ final class TrackDetailView: UIView {
         setupConstraints()
     }
     
+    // MARK: - Setup
+    
     func configure(viewModel: SearchViewModel.Cell) {
         trackTitleLabel.text = viewModel.trackName
         authorTitleLabel.text = viewModel.artistName
         playTrack(previewUrl: viewModel.previewUrl)
         
         monitorStartTime()
+        observeOlayerCurrentTime()
         
         if let urlString = viewModel.iconUrl?.absoluteString {
             let string600 = urlString.replacingOccurrences(of: "100x100", with: "600x600")
@@ -212,8 +215,6 @@ final class TrackDetailView: UIView {
             }
         }
     }
-    
-    // MARK: - Setup
     
     private func setupUserInterface() {
         addSubview(mainTrackDetailStackView)
@@ -304,6 +305,17 @@ final class TrackDetailView: UIView {
         }
     }
     
+    private func observeOlayerCurrentTime() {
+        let interval = CMTimeMake(value: 1, timescale: 2)
+        player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] (time) in
+            self?.currentTimeValueLabel.text = time.toDisplayString()
+            
+            let durationTime = self?.player.currentItem?.duration
+            let currentDurationText = ((durationTime ?? CMTimeMake(value: 1, timescale: 1)) - time).toDisplayString()
+            self?.durationValueLabel.text = "-\(currentDurationText)"
+        }
+    }
+    
     deinit {
         print("TrackDetailView memory being reclaimed...")
     }
@@ -328,8 +340,8 @@ final class TrackDetailView: UIView {
             initialSpringVelocity: 1,
             options: .curveEaseInOut,
             animations: {
-            self.trackArtworkImageView.transform = .identity
-        }, completion: nil
+                self.trackArtworkImageView.transform = .identity
+            }, completion: nil
         )
     }
     
@@ -341,9 +353,9 @@ final class TrackDetailView: UIView {
             initialSpringVelocity: 1,
             options: .curveEaseInOut,
             animations: {
-            let scale: CGFloat = 0.8
-            self.trackArtworkImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
-        }, completion: nil
+                let scale: CGFloat = 0.8
+                self.trackArtworkImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
+            }, completion: nil
         )
     }
     
