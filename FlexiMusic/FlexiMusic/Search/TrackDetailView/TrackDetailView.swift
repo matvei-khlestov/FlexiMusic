@@ -17,7 +17,10 @@ protocol TrackMovingDelegate: AnyObject {
 
 final class TrackDetailView: UIView {
     
+    // MARK: - Delegates
+    
     weak var delegate: TrackMovingDelegate?
+    weak var tabBarDelegate: TabBarControllerDelegate?
     
     // MARK: - UI Elements
     
@@ -396,7 +399,7 @@ final class TrackDetailView: UIView {
     }
     
     @objc private func handleSlideDownHandleButtonTap() {
-        self.removeFromSuperview()
+        self.tabBarDelegate?.minimizeTrackDetailController()
     }
     
     @objc private func playPauseAction() {

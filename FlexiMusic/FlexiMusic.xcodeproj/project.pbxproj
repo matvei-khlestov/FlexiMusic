@@ -29,6 +29,7 @@
 		A074845E2D2D96DA0065D8BF /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A074845D2D2D96DA0065D8BF /* FooterView.swift */; };
 		A0854F342E50F49B004633CA /* UIStackView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0854F332E50F49B004633CA /* UIStackView+extension.swift */; };
 		A0854F382E5E5DCC004633CA /* CMTime+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0854F372E5E5DCC004633CA /* CMTime+Extension.swift */; };
+		A0854F3A2E5E9B9F004633CA /* UIApplication+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0854F392E5E9B9F004633CA /* UIApplication+extension.swift */; };
 		A08F5A452E3FC78A00D5C987 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08F5A442E3FC78A00D5C987 /* UIView+Extension.swift */; };
 		A0B059772E3FFFE5007E880B /* TrackDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B059762E3FFFE5007E880B /* TrackDetailView.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +57,7 @@
 		A074845D2D2D96DA0065D8BF /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		A0854F332E50F49B004633CA /* UIStackView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+extension.swift"; sourceTree = "<group>"; };
 		A0854F372E5E5DCC004633CA /* CMTime+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMTime+Extension.swift"; sourceTree = "<group>"; };
+		A0854F392E5E9B9F004633CA /* UIApplication+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+extension.swift"; sourceTree = "<group>"; };
 		A08F5A442E3FC78A00D5C987 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		A0B059762E3FFFE5007E880B /* TrackDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -195,6 +197,7 @@
 				A08F5A442E3FC78A00D5C987 /* UIView+Extension.swift */,
 				A0854F332E50F49B004633CA /* UIStackView+extension.swift */,
 				A0854F372E5E5DCC004633CA /* CMTime+Extension.swift */,
+				A0854F392E5E9B9F004633CA /* UIApplication+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				A07484562D2D5A990065D8BF /* TrackTableViewCell.swift in Sources */,
 				A074844E2D2C49030065D8BF /* SearchInteractor.swift in Sources */,
 				A074844F2D2C49030065D8BF /* SearchWorker.swift in Sources */,
+				A0854F3A2E5E9B9F004633CA /* UIApplication+extension.swift in Sources */,
 				A07484502D2C49030065D8BF /* SearchViewController.swift in Sources */,
 				A0854F382E5E5DCC004633CA /* CMTime+Extension.swift in Sources */,
 				A07484512D2C49030065D8BF /* SearchModels.swift in Sources */,
