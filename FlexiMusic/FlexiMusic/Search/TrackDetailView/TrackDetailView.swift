@@ -10,7 +10,14 @@ import SnapKit
 import Kingfisher
 import AVFoundation
 
+protocol TrackMovingDelegate: AnyObject {
+    func moveBackForPreviousTrack() -> SearchViewModel.Cell?
+    func moveForwardForPreviousTrack() -> SearchViewModel.Cell?
+}
+
 final class TrackDetailView: UIView {
+    
+    weak var delegate: TrackMovingDelegate?
     
     // MARK: - UI Elements
     
@@ -132,6 +139,7 @@ final class TrackDetailView: UIView {
         button.setPreferredSymbolConfiguration(configuration, forImageIn: .normal)
         button.setImage(UIImage(systemName: "backward.fill"), for: .normal)
         button.tintColor = .label
+        button.addTarget(self, action: #selector(previousTrack), for: .touchUpInside)
         return button
     }()
     
@@ -153,6 +161,7 @@ final class TrackDetailView: UIView {
         button.setPreferredSymbolConfiguration(configuration, forImageIn: .normal)
         button.setImage(UIImage(systemName: "forward.fill"), for: .normal)
         button.tintColor = .label
+        button.addTarget(self, action: #selector(nextTrack), for: .touchUpInside)
         return button
     }()
     
@@ -202,7 +211,7 @@ final class TrackDetailView: UIView {
     
     // MARK: - Setup
     
-    func configure(viewModel: SearchViewModel.Cell) {
+    func set(viewModel: SearchViewModel.Cell) {
         trackTitleLabel.text = viewModel.trackName
         authorTitleLabel.text = viewModel.artistName
         playTrack(previewUrl: viewModel.previewUrl)
@@ -400,6 +409,18 @@ final class TrackDetailView: UIView {
             playPauseToggleButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
             reduceTrackImageView()
         }
+    }
+    
+    @objc private func previousTrack() {
+        let cellViewModel = delegate?.moveBackForPreviousTrack()
+        guard let cellInfo = cellViewModel else { return }
+        self.set(viewModel: cellInfo)
+    }
+    
+    @objc private func nextTrack() {
+        let cellViewModel = delegate?.moveForwardForPreviousTrack()
+        guard let cellInfo = cellViewModel else { return }
+        self.set(viewModel: cellInfo)
     }
 }
 
