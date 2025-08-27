@@ -30,6 +30,7 @@ final class SearchViewController: UITableViewController, SearchDisplayLogicProto
     private var searchViewModel = SearchViewModel(cells: [])
     
     private lazy var footerView = FooterView()
+    weak var tabBarDelegate: TabBarControllerDelegate?
     
     // MARK: - Routing
     
@@ -43,6 +44,7 @@ final class SearchViewController: UITableViewController, SearchDisplayLogicProto
         configureTableViewCell()
         
         setupSearchBar()
+        searchBar(searchController.searchBar, textDidChange: "billie")
     }
     
     // MARK: - Touch Handling
@@ -120,17 +122,8 @@ extension SearchViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let windowScene = UIApplication.shared.connectedScenes
-            .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
-              let window = windowScene.windows.first(where: { $0.isKeyWindow }) else {
-            return
-        }
         let cellViewModel = searchViewModel.cells[indexPath.row]
-        let trackDetailView = TrackDetailView()
-        trackDetailView.frame = window.bounds
-        trackDetailView.set(viewModel: cellViewModel)
-        trackDetailView.delegate = self
-        window.addSubview(trackDetailView)
+        self.tabBarDelegate?.maximizeTrackDetailController(viewModel: cellViewModel)
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
