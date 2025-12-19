@@ -35,7 +35,7 @@ final class TrackDetailView: UIView {
         return button
     }()
     
-    private lazy var mainTrackDetailStackView: UIStackView = {
+    let mainTrackDetailStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 10
@@ -47,7 +47,6 @@ final class TrackDetailView: UIView {
         let scale: CGFloat = 0.8
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .secondarySystemBackground
         imageView.layer.cornerRadius = 5
         imageView.transform = CGAffineTransform(scaleX: scale, y: scale)
         return imageView
@@ -196,6 +195,64 @@ final class TrackDetailView: UIView {
         return avPlayer
     }()
     
+    let minimalTrackDetailsView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .secondarySystemBackground
+        return view
+    }()
+    
+    private lazy var minimalTrackDetailsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 16
+        return stackView
+    }()
+    
+    private lazy var minimalArtworkImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 0
+        return imageView
+    }()
+    
+    private lazy var minimalTrackTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 18, weight: .regular)
+        label.textColor = .label
+        label.numberOfLines = 1
+        return label
+    }()
+    
+    private lazy var minimalPlayPauseButton: UIButton = {
+        let button = UIButton(type: .system)
+        let configuration = UIImage.SymbolConfiguration(pointSize: 22, weight: .regular)
+        button.setPreferredSymbolConfiguration(configuration, forImageIn: .normal)
+        button.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        button.tintColor = .label
+        button.addTarget(self, action: #selector(playPauseAction), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var minimalNextTrackButton: UIButton = {
+        let button = UIButton(type: .system)
+        let configuration = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular)
+        button.setPreferredSymbolConfiguration(configuration, forImageIn: .normal)
+        button.setImage(UIImage(systemName: "forward.fill"), for: .normal)
+        button.tintColor = .label
+        button.addTarget(self, action: #selector(nextTrack), for: .touchUpInside)
+        return button
+    }()
+    
+    private let minimalTrackDetailsTopSeparatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .separator
+        view.alpha = 0.6
+        return view
+    }()
+    
     // MARK: - Init
     
     override init(frame: CGRect) {
@@ -219,19 +276,39 @@ final class TrackDetailView: UIView {
         authorTitleLabel.text = viewModel.artistName
         playTrack(previewUrl: viewModel.previewUrl)
         
+        minimalTrackTitleLabel.text = viewModel.trackName
+        
         monitorStartTime()
         observeOlayerCurrentTime()
+        playPauseToggleButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        minimalPlayPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         
         if let urlString = viewModel.iconUrl?.absoluteString {
             let string600 = urlString.replacingOccurrences(of: "100x100", with: "600x600")
             if let url = URL(string: string600) {
                 trackArtworkImageView.kf.setImage(with: url)
+                minimalArtworkImageView.kf.setImage(with: url)
             }
         }
     }
     
     private func setupUserInterface() {
-        addSubview(mainTrackDetailStackView)
+        addSubviews(
+            minimalTrackDetailsView,
+            mainTrackDetailStackView
+        )
+        
+        minimalTrackDetailsView.addSubviews(
+            minimalTrackDetailsTopSeparatorView,
+            minimalTrackDetailsStackView
+        )
+        
+        minimalTrackDetailsStackView.addArrangedSubviews(
+            minimalArtworkImageView,
+            minimalTrackTitleLabel,
+            minimalPlayPauseButton,
+            minimalNextTrackButton
+        )
         
         mainTrackDetailStackView.addArrangedSubviews(
             slideDownHandleButton,
@@ -273,6 +350,40 @@ final class TrackDetailView: UIView {
     // MARK: - Constraints
     
     private func setupConstraints() {
+        
+        minimalTrackDetailsView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalTo(64)
+        }
+        
+        minimalTrackDetailsTopSeparatorView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalTo(1)
+        }
+
+        minimalTrackDetailsStackView.snp.makeConstraints { make in
+            make.top.equalTo(minimalTrackDetailsTopSeparatorView.snp.bottom).offset(8)
+            make.leading.equalToSuperview().offset(8)
+            make.trailing.equalToSuperview().inset(8)
+            make.bottom.equalToSuperview().inset(8)
+        }
+        
+        minimalArtworkImageView.snp.makeConstraints { make in
+            make.width.height.equalTo(48)
+        }
+
+        minimalPlayPauseButton.snp.makeConstraints { make in
+            make.width.equalTo(44)
+        }
+
+        minimalNextTrackButton.snp.makeConstraints { make in
+            make.width.equalTo(48)
+        }
+        
         mainTrackDetailStackView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
             make.leading.equalTo(safeAreaLayoutGuide).offset(30)
@@ -406,10 +517,12 @@ final class TrackDetailView: UIView {
         if player.timeControlStatus == .paused {
             player.play()
             playPauseToggleButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            minimalPlayPauseButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
             enlargeTrackImageView()
         } else {
             player.pause()
             playPauseToggleButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            minimalPlayPauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
             reduceTrackImageView()
         }
     }

@@ -97,7 +97,7 @@ extension TabBarController {
         
         bottomAnchorConstraint.isActive = true
         maximizedTopAnchorConstraint.isActive = true
-
+        
         trackDetailView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         trackDetailView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
     }
@@ -119,6 +119,8 @@ extension TabBarController: TabBarControllerDelegate {
                        animations: {
             self.view.layoutIfNeeded()
             self.tabBar.alpha = 0
+            self.trackDetailView.minimalTrackDetailsView.alpha = 0
+            self.trackDetailView.mainTrackDetailStackView.alpha = 1
         },
                        completion: nil)
         
@@ -139,6 +141,8 @@ extension TabBarController: TabBarControllerDelegate {
                        animations: {
             self.view.layoutIfNeeded()
             self.tabBar.alpha = 1
+            self.trackDetailView.minimalTrackDetailsView.alpha = 1
+            self.trackDetailView.mainTrackDetailStackView.alpha = 0
         },
                        completion: nil)
     }
