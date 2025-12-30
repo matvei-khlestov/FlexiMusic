@@ -6,33 +6,34 @@
 //  Copyright (c) 2025 ___ORGANIZATIONNAME___. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 protocol SearchPresentationLogic: AnyObject {
     func presentData(response: Search.Model.Response.ResponseType)
 }
 
 final class SearchPresenter: SearchPresentationLogic {
-    
+
     weak var viewController: SearchDisplayLogicProtocol?
-    
+
     func presentData(response: Search.Model.Response.ResponseType) {
         switch response {
+
         case .presentTracks(let searchResults):
-            let cells = searchResults?.compactMap({ track in
-                cellViewModel(from: track)
-            }) ?? []
-            
+            let cells = searchResults?.compactMap { cellViewModel(from: $0) } ?? []
             let searchViewModel = SearchViewModel(cells: cells)
-            print("presenter .presentTracks")
-            viewController?.displayData(viewModel: Search.Model.ViewModel.ViewModelData.displayTracks(SearchViewModel: searchViewModel))
+
+            viewController?.displayData(
+                viewModel: .displayTracks(SearchViewModel: searchViewModel)
+            )
+
         case .presentFooterView:
-            viewController?.displayData(viewModel: Search.Model.ViewModel.ViewModelData.displayFooterView)
+            viewController?.displayData(viewModel: .displayFooterView)
         }
     }
-    
+
     private func cellViewModel(from track: Track) -> SearchViewModel.Cell {
-        return SearchViewModel.Cell(
+        SearchViewModel.Cell(
             iconUrl: track.artworkUrl100,
             trackName: track.trackName,
             collectionName: track.collectionName ?? "",

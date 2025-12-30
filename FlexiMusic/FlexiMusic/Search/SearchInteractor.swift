@@ -6,34 +6,39 @@
 //  Copyright (c) 2025 ___ORGANIZATIONNAME___. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 protocol SearchBusinessLogic: AnyObject {
     func makeRequest(request: Search.Model.Request.RequestType)
 }
 
 final class SearchInteractor: SearchBusinessLogic {
-    
+
     var presenter: SearchPresentationLogic?
-    var service: SearchService?
-    var networkService = NetworkService.shared
-    
+
+    private let tracksFetcher: TracksFetching
+
+    init(tracksFetcher: TracksFetching = NetworkService.shared) {
+        self.tracksFetcher = tracksFetcher
+    }
+
     func makeRequest(request: Search.Model.Request.RequestType) {
-        if service == nil {
-            service = SearchService()
-        }
-        
         switch request {
         case .getTracks(let searchTerm):
-            print("interactor .getTracks")
-            presenter?.presentData(response: Search.Model.Response.ResponseType.presentFooterView)
-            networkService.fetchTracks(searchTerm: searchTerm) { [weak self] result in
+
+            presenter?.presentData(response: .presentFooterView)
+
+            tracksFetcher.fetchTracks(searchTerm: searchTerm) { [weak self] result in
+                guard let self else { return }
+
                 switch result {
                 case .success(let tracks):
-                    guard let self = self else { return }
-                    self.presenter?.presentData(response: Search.Model.Response.ResponseType.presentTracks(tracks: tracks))
+                    self.presenter?.presentData(response: .presentTracks(tracks: tracks))
+
                 case .failure(let error):
-                    print("Error in fetch tracks: \(error)")
+                    #if DEBUG
+                    print("SearchInteractor: fetchTracks error: \(error)")
+                    #endif
                 }
             }
         }
