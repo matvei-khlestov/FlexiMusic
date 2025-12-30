@@ -7,45 +7,56 @@
 
 import Foundation
 
-final class NetworkService {
-    private let apiManager = APIService.shared
+protocol TracksFetching {
+    func fetchTracks(searchTerm: String, completion: @escaping (Result<[Track], NetworkError>) -> Void)
+}
+
+final class NetworkService: TracksFetching {
+    
+    private let apiManager: APIService
+    private let session: URLSession
     
     static let shared = NetworkService()
     
-    private init() {}
+    init(apiManager: APIService = .shared, session: URLSession = .shared) {
+        self.apiManager = apiManager
+        self.session = session
+    }
     
     func fetchTracks(searchTerm: String, completion: @escaping (Result<[Track], NetworkError>) -> Void) {
         guard let request = apiManager.createRequest(searchTerm: searchTerm) else {
-            completion(.failure(.invalidRequest))
+            completeOnMain(.failure(.invalidRequest), completion: completion)
             return
         }
         
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let response = response as? HTTPURLResponse {
-                print("Response status code: \(response.statusCode)")
-            }
+        session.dataTask(with: request) { [weak self] data, response, error in
+            guard let self else { return }
             
-            guard let data = data else {
-                sendFailure(with: .noData(description: error?.localizedDescription ?? "No error description"))
+            if let error {
+                self.completeOnMain(.failure(.noData(description: error.localizedDescription)), completion: completion)
                 return
             }
             
-            let decoder = JSONDecoder()
+            guard let data else {
+                self.completeOnMain(.failure(.noData(description: "No data")), completion: completion)
+                return
+            }
             
             do {
-                let searchResponse = try decoder.decode(SearchResponse.self, from: data)
-                DispatchQueue.main.async {
-                    completion(.success(searchResponse.results))
-                }
+                let searchResponse = try JSONDecoder().decode(SearchResponse.self, from: data)
+                self.completeOnMain(.success(searchResponse.results), completion: completion)
             } catch {
-                sendFailure(with: .decodingError(description: error.localizedDescription))
-            }
-            
-            func sendFailure(with error: NetworkError) {
-                DispatchQueue.main.async {
-                    completion(.failure(error))
-                }
+                self.completeOnMain(.failure(.decodingError(description: error.localizedDescription)), completion: completion)
             }
         }.resume()
+    }
+    
+    private func completeOnMain(
+        _ result: Result<[Track], NetworkError>,
+        completion: @escaping (Result<[Track], NetworkError>) -> Void
+    ) {
+        DispatchQueue.main.async {
+            completion(result)
+        }
     }
 }

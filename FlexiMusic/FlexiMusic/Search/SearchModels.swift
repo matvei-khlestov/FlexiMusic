@@ -33,7 +33,7 @@ enum Search {
 }
 
 struct SearchViewModel {
-    struct Cell: TrackCellViewModelProtocol {
+    struct Cell: TrackTableViewCellViewModel {
         var iconUrl: URL?
         var trackName: String
         var collectionName: String

@@ -8,18 +8,11 @@
 
 import UIKit
 
-protocol SearchRoutingLogic: AnyObject {
-    
-}
+protocol SearchRoutingLogic: AnyObject {}
 
-protocol SearchDataPassing {
-    //  var dataStore: SearchDataStore? { get }
-}
+protocol SearchDataPassing {}
 
 final class SearchRouter: NSObject, SearchRoutingLogic {
     
     weak var viewController: SearchViewController?
-    
-    // MARK: Routing
-    
 }
