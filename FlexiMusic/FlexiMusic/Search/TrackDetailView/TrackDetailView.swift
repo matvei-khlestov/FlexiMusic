@@ -513,7 +513,6 @@ final class TrackDetailView: UIView {
     deinit {
         removeBoundaryObserverIfNeeded()
         removePeriodicObserverIfNeeded()
-        printDeinit()
     }
 
     private func removeBoundaryObserverIfNeeded() {
@@ -533,9 +532,6 @@ final class TrackDetailView: UIView {
     // MARK: - Player
 
     private func playTrack(previewUrl: URL?) {
-        #if DEBUG
-        print("Пытаюсь включить трек по ссылке: \(previewUrl?.absoluteString ?? "Отсутствует")")
-        #endif
         playerService.replaceAndPlay(previewUrl: previewUrl)
     }
 
@@ -705,12 +701,6 @@ final class TrackDetailView: UIView {
         let image = UIImage(systemName: imageName)
         playPauseToggleButton.setImage(image, for: .normal)
         minimalPlayPauseButton.setImage(image, for: .normal)
-    }
-
-    private func printDeinit() {
-        #if DEBUG
-        print("TrackDetailView memory being reclaimed...")
-        #endif
     }
 }
 

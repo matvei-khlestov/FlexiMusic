@@ -20,8 +20,6 @@ final class APIService {
             return nil
         }
         
-        print("Request URL: \(url)")
-        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         return request
